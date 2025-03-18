@@ -44,6 +44,13 @@
           cook-cli
         ];
       };
+
+      deploy = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          skopeo
+          flyctl
+        ];
+      };
     });
   };
 }

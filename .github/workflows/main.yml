@@ -1,7 +1,9 @@
 name: Recipes CI
 on: [push, workflow_dispatch]
 env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+  REGISTRY: registry.fly.io/hufi-mimi-recipes
+  TAG: ${{ github.sha }}
 jobs:
   build-and-deploy:
     name: Build and Deploy
@@ -9,5 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
       - run: nix build .#container
+      - run: nix develop .#deploy --command -- skopeo copy docker-archive:./result docker://$REGISTRY:$TAG --dest-creds x:$FLY_ACCESS_TOKEN
+      - run: nix develop .#deploy --command -- flyctl deploy -i $REGISTRY:$TAG
