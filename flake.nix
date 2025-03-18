@@ -16,19 +16,20 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ] (system: fn nixpkgs.legacyPackages.${system});
+    tag = self.rev or "dirty";
   in {
     packages = forEachSystem (pkgs: {
       container = pkgs.dockerTools.buildLayeredImage {
         name = "cook-server";
-        tag = "latest";
+        tag = tag;
         contents = [
           pkgs.cook-cli
-          "${self}/recipes"
+          ./recipes
         ];
         config = {
           Entrypoint = ["cook"];
           Cmd = ["server" "--host"];
-          WorkingDir = "${self}/recipes";
+          WorkingDir = ./recipes;
           ExposedPorts = {
             "9080" = {};
           };
