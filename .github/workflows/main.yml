@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - run: nix build .#container
-      - run: nix develop .#deploy --command -- skopeo copy docker-archive:./result docker://$REGISTRY:$TAG --dest-creds x:$FLY_ACCESS_TOKEN
+      - run: nix develop .#deploy --command -- skopeo copy --dest-creds x:$FLY_ACCESS_TOKEN docker-archive:./result docker://$REGISTRY:$TAG
       - run: nix develop .#deploy --command -- flyctl deploy -i $REGISTRY:$TAG
