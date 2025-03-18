@@ -17,6 +17,7 @@
         "aarch64-darwin"
       ] (system: fn nixpkgs.legacyPackages.${system});
     tag = self.rev or "dirty";
+    port = "8080";
   in {
     packages = forEachSystem (pkgs: {
       container = pkgs.dockerTools.buildLayeredImage {
@@ -28,10 +29,10 @@
         ];
         config = {
           Entrypoint = ["cook"];
-          Cmd = ["server" "--host"];
+          Cmd = ["server" "--host" "--port" port];
           WorkingDir = ./recipes;
           ExposedPorts = {
-            "9080" = {};
+            port = {};
           };
         };
       };
