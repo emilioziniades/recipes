@@ -4,4 +4,4 @@ This is not the name of a cool CLI tool or web framework, it's just a repo conta
 
 All the recipes are written in [Cooklang](https://cooklang.org/), which allows me to generate shopping lists from the recipes.
 
-Currently, I build a container image with nix which runs `cook server` and host it on Fly.io.
+Currently, I build a container image with nix which runs `cook server` and [host it](https://hufi-mimi-recipes.fly.dev) on Fly.io.
