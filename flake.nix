@@ -42,13 +42,9 @@
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           cook-cli
-        ];
-      };
-
-      deploy = pkgs.mkShell {
-        buildInputs = with pkgs; [
           skopeo
           flyctl
+          just
         ];
       };
     });
