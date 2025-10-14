@@ -1,7 +1,7 @@
 pub mod cli;
 pub mod lint;
 
-use std::{collections::HashSet, fs, path::PathBuf, process};
+use std::{collections::HashSet, ffi::OsStr, fs, path::PathBuf, process};
 
 use anyhow::Context;
 use anyhow::anyhow;
@@ -82,11 +82,7 @@ fn get_all_recipes(dir: PathBuf) -> Vec<String> {
     WalkDir::new(dir)
         .into_iter()
         .filter_map(|e| e.ok())
-        .filter(|e| {
-            e.file_type().is_file()
-                && e.path().extension().is_some()
-                && e.path().extension().unwrap() == "cook"
-        })
+        .filter(|e| e.file_type().is_file() && e.path().extension() == Some(OsStr::new("cook")))
         .map(|e| e.path().to_path_buf())
         .map(|pb| fs::read_to_string(pb).unwrap())
         .collect()
