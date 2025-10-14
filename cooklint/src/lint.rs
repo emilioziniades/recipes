@@ -8,35 +8,33 @@ pub struct LintResult {
 impl LintResult {
     pub fn summarize(&self) {
         if self.parse_failures.len() > 0 {
-            println!("Parse failures:");
+            println!("FAIL: Parse failures");
 
             for parse_failure in &self.parse_failures {
-                println!("{parse_failure}");
+                println!("\t{parse_failure}");
             }
         } else {
-            println!("All recipes parsed successfully");
+            println!("PASS: All recipes parsed successfully");
         }
-        println!("");
 
         if self.ingredients_no_aisle.len() > 0 {
-            println!("Ingredients missing an aisle:");
+            println!("FAIL: Ingredients missing an aisle");
 
             for parse_failure in &self.ingredients_no_aisle {
-                println!("{parse_failure}");
+                println!("\t{parse_failure}");
             }
         } else {
-            println!("All ingredients have an aisle");
+            println!("PASS: All ingredients have an aisle");
         }
-        println!("");
 
         if self.duplicate_ingredients.len() > 0 {
-            println!("Duplicate ingredients found:");
+            println!("FAIL: Duplicate ingredients found");
 
             for (i0, i1) in &self.duplicate_ingredients {
-                println!("{i0} {i1}");
+                println!("\t{i0} {i1}");
             }
         } else {
-            println!("No duplicate ingredients found");
+            println!("PASS: No duplicate ingredients found");
         }
     }
 
