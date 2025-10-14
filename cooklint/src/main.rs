@@ -13,8 +13,13 @@ use walkdir::WalkDir;
 use crate::lint::LintResult;
 
 const MIN_LEVENSHTEIN_DISTANCE: usize = 2;
-const LEVENSHTEIN_IGNORE: [(&str, &str); 3] =
-    [("salt", "kale"), ("rice", "lime"), ("mint", "milk")];
+const LEVENSHTEIN_IGNORE: [(&str, &str); 5] = [
+    ("salt", "kale"),
+    ("rice", "lime"),
+    ("mint", "milk"),
+    ("pepper", "peppers"),
+    ("broccoli", "broccolini"),
+];
 
 fn main() -> anyhow::Result<()> {
     let args = cli::Args::parse();
