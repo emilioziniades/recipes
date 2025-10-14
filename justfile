@@ -16,5 +16,5 @@ push-image:
 deploy:
     flyctl deploy -i $REGISTRY:$TAG
 
-just lint:
+lint:
     cooklint --dir ./recipes
