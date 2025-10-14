@@ -38,7 +38,6 @@ impl LintResult {
         } else {
             println!("No duplicate ingredients found");
         }
-        println!("");
     }
 
     pub fn is_success(&self) -> bool {
