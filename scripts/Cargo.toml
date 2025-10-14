@@ -1,0 +1,10 @@
+[package]
+name = "scripts"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cooklang = "0.17.1"
+itertools = "0.14.0"
+levenshtein = "1.0.5"
+walkdir = "2.5.0"
