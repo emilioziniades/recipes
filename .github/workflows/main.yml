@@ -5,7 +5,15 @@ env:
   REGISTRY: registry.fly.io/hufi-mimi-recipes
   TAG: ${{ github.sha }}
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: nix develop .#lint -c just lint
   build-and-deploy:
+    needs: lint
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
