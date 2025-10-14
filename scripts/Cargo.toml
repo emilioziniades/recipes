@@ -1,9 +1,11 @@
 [package]
-name = "scripts"
-version = "0.1.0"
+name = "cooklint"
+version = "0.0.1"
 edition = "2024"
 
 [dependencies]
+anyhow = "1.0.100"
+clap = { version = "4.5.49", features = ["derive"] }
 cooklang = "0.17.1"
 itertools = "0.14.0"
 levenshtein = "1.0.5"
