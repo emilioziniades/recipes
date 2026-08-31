@@ -29,7 +29,10 @@
             name = "cook-server";
             tag = tag;
             contents = [
-              pkgs.cook-cli
+              #TODO: remove attrs override when this is merged: https://github.com/NixOS/nixpkgs/pull/552347
+              (pkgs.cook-cli.overrideAttrs (old: {
+                cargoBuildFeatures = (old.cargoBuildFeatures or [ ]) ++ [ "server" ];
+              }))
               ./recipes
             ];
             config = {
@@ -42,7 +45,7 @@
               ];
               WorkingDir = ./recipes;
               ExposedPorts = {
-                port = { };
+                "${port}/tcp" = { };
               };
             };
           };
