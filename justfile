@@ -10,6 +10,9 @@ load:
 run-darwin: build-darwin load
     docker run -p 8080:8080 cook-server:dirty
 
+run: build load
+    docker run -p 8080:8080 cook-server:dirty
+
 push-image:
     skopeo copy --dest-creds x:"$FLY_ACCESS_TOKEN" docker-archive:./result "docker://$REGISTRY:$TAG"
 
